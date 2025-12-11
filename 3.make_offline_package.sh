@@ -1,6 +1,6 @@
 #!/bin/bash -x
 
-sudo apt install python3 python3-pip python-is-python3 python3-xyz
+sudo apt install -y python3 python3-pip python-is-python3 python3-xyz
 pip install pyyaml
 
 
