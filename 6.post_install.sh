@@ -10,3 +10,5 @@ kubectl create -f tigera-operator.yaml
 sleep 10
 kubectl create -f custom-resources.yaml
 
+watch -n 1 kubectl get pods -A
+
