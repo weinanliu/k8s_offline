@@ -4,9 +4,9 @@ export KUBECONFIG=/etc/kubernetes/admin.conf
 
 kubectl taint nodes --all node-role.kubernetes.io/control-plane:NoSchedule-
 
-kubectl apply -f operator-crds.yaml
-kubectl apply -f tigera-operator.yaml
+kubectl create -f operator-crds.yaml
+kubectl create -f tigera-operator.yaml
 
 sleep 10
-kubectl apply -f custom-resources.yaml
+kubectl create -f custom-resources.yaml
 
