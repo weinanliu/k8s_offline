@@ -24,12 +24,11 @@ kubeadm init  \
 	--kubernetes-version="v1.34.3" \
 	2>&1 | tee  kubeadm_init.log
 
-sleep 60
+sleep 90
 kubectl taint nodes --all node-role.kubernetes.io/control-plane:NoSchedule-
 
-sleep 3
 kubectl apply -f tigera-operator.yaml
 
-sleep 3
+sleep 10
 kubectl apply -f custom-resources.yaml
 

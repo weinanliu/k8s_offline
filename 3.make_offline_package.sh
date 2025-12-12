@@ -1,10 +1,10 @@
 #!/bin/bash -x
 
-sudo apt install -y python3 python3-pip python-is-python3 python3-xyz
+sudo apt install -y python3 python3-pip python-is-python3
 pip install pyyaml
 
 
-./export_tar__from_imgs.py $(kubeadm config images list) k8s_cores.tar
+python ./export_tar__from_imgs.py $(kubeadm config images list) k8s_cores.tar
 
 
 
@@ -13,8 +13,8 @@ pip install pyyaml
 # wget https://raw.githubusercontent.com/projectcalico/calico/v3.31.2/manifests/custom-resources.yaml
 # wget https://raw.githubusercontent.com/projectcalico/calico/v3.31.2/manifests/calico.yaml
 #
-./export_tar__from_imgs.py $(./extract_imgs_from_yaml.py tigera-operator.yaml) tigera.tar
-./export_tar__from_imgs.py $(./extract_imgs_from_yaml.py calico.yaml) calico.tar
+python ./export_tar__from_imgs.py $(python ./extract_imgs_from_yaml.py tigera-operator.yaml) tigera.tar
+python ./export_tar__from_imgs.py $(python ./extract_imgs_from_yaml.py calico.yaml) calico.tar
 
 
 
