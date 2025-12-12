@@ -9,9 +9,9 @@ sudo swapoff -a
 
 sudo systemctl enable --now kubelet
 
-ctr -n k8s.io images import k8s_cores.tar
-ctr -n k8s.io images import calico.tar
-ctr -n k8s.io images import tigera.tar
+for imgtar in *images.tar; do
+  ctr -n k8s.io images import ${imgtar}
+done
 
 # kubeadm init的时候总有人想找k8s.io
 #ctr -n k8s.io images tag  registry.aliyuncs.com/google_containers/pause:3.10.1 registry.k8s.io/pause:3.10.1
@@ -24,11 +24,7 @@ kubeadm init  \
 	--kubernetes-version="v1.34.3" \
 	2>&1 | tee  kubeadm_init.log
 
-sleep 90
-kubectl taint nodes --all node-role.kubernetes.io/control-plane:NoSchedule-
+export KUBECONFIG=/etc/kubernetes/admin.conf
 
-kubectl apply -f tigera-operator.yaml
-
-sleep 10
-kubectl apply -f custom-resources.yaml
+watch -n 1 kubectl get pods -A
 

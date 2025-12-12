@@ -34,7 +34,7 @@ def placement_registry(images):
 
 def pull_images(images, namespace="k8s.io"):
     for img in images:
-        cmd = ['ctr', '-n', namespace, 'image', 'pull', img]
+        cmd = ['ctr', '-n', namespace, 'image', 'pull', '--all-platforms', img]
         print(cmd)
         subprocess.run(cmd, check=True)
 
@@ -45,7 +45,7 @@ def retag(images, after_tag, namespace="k8s.io"):
         subprocess.run(cmd, check=True)
 
 def export_images(images, dest_tar, namespace="k8s.io"):
-    cmd = ['ctr', '-n', namespace, 'image', 'export'] + [dest_tar] + images
+    cmd = ['ctr', '-n', namespace, 'image', 'export', '--all-platforms'] + [dest_tar] + images
     print(cmd)
     subprocess.run(cmd, check=True)
 
